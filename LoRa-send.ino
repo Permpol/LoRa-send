@@ -2,7 +2,7 @@
 #include <LoRa.h>
 
 int led = 3;
-String text = "LED ติด";
+String text;
 
 void setup(){
   Serial.begin(9600);
@@ -23,12 +23,17 @@ void loop(){
     Serial.print(text);
     Serial.print("' RSSI is ");
     Serial.println(LoRa.packetRssi());
-    digitalWrite(led,HIGH);
+    
   }
   else{
-     digitalWrite(led,LOW);
+    Serial.printIn("no data");
   }
 
+  if(text == "ห้ LED ติด"){
+    digitalWrite(led,HIGH);
+  }else{
+    digitalWrite(led,LOW);
+  }
  
 
 }
