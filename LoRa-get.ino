@@ -1,10 +1,10 @@
 #include <SPI.h>
 #include <LoRa.h>
 
-int led = 3;
-String text;
+int led = A1;
+String text = "LED ติด";
 
-void setup(){
+void setup() {
   Serial.begin(9600);
   while (!Serial);
   Serial.println("LoRa-received");
@@ -13,7 +13,7 @@ void setup(){
     Serial.println("Starting LoRa failed!");
     while(1);
   }
-  digitalWrite(led,0);
+  analogWrite(led,0);
 }
 
 void loop(){
@@ -23,17 +23,9 @@ void loop(){
     Serial.print(text);
     Serial.print("' RSSI is ");
     Serial.println(LoRa.packetRssi());
-    
+    analogWrite(led,1023);
   }
   else{
-    Serial.printIn("no data");
+     analogWrite(led,0);
   }
-
-  if(text == "ห้ LED ติด"){
-    digitalWrite(led,HIGH);
-  }else{
-    digitalWrite(led,LOW);
-  }
- 
-
 }
