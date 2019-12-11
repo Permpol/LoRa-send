@@ -1,9 +1,10 @@
 #include <SPI.h>
 #include <LoRa.h>
 
-int pin = A0;
+int pin = 3;
 
 String text = "ให้ LED ติด";
+String text1 = "ให้ LED ดับ";
 
 void setup() {
   Serial.begin(9600);
@@ -17,8 +18,8 @@ void setup() {
 }
 
 void loop(){
-  int A = analogRead(pin);
-  if (A==1023){
+  int A = digitalRead(pin);
+  if (A==HIGH){
     LoRa.beginPacket();
     LoRa.print(text);
     LoRa.endPacket();
@@ -27,4 +28,15 @@ void loop(){
     Serial.print(text);
     Serial.println("'");
   }
+  if (A==LOW){
+    LoRa.beginPacket();
+    LoRa.print(text1);
+    LoRa.endPacket();
+
+    Serial.print("Send '");
+    Serial.print(text1);
+    Serial.println("'");
+    delay(2000);
+  }
+  
 }
